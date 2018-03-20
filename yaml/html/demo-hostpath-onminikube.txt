@@ -4,8 +4,9 @@ ssh docker@192.168.99.100
 using username "docker" password "tcuser"
 
 2. run 
-mkdir /sharehtml
-cat <<EOF >  /sharehtml/index.html
+sudo mkdir /sharehtml
+cd /sharehtml
+sudo cat <<EOF >  /sharehtml/index.html
 <html>
 <head>
 <title>Welcome to nginx!</title>
