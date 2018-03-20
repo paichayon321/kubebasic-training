@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: localclaim
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: local-store
+  resources:
+    requests:
+      storage: 10Mi
