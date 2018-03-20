@@ -1,0 +1,38 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+  name: webservice-blue
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: webservice-blue
+  template:
+    metadata:
+      labels:
+        name: webservice-blue
+    spec:
+      containers:
+      - image: paichayon/web-serviceblue
+        name: webservice-blue
+        ports:
+        - containerPort: 80
+          protocol: TCP
+        resources:
+          requests:
+            cpu: 200m
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: blue-service
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+    nodePort: 32221
+  selector:
+    name: webservice-blue
+  type: NodePort

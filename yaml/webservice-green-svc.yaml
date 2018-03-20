@@ -1,0 +1,38 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+  name: webservice-green
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: webservice-green
+  template:
+    metadata:
+      labels:
+        name: webservice-green
+    spec:
+      containers:
+      - image: paichayon/web-servicegreen
+        name: webservice-green
+        ports:
+        - containerPort: 80
+          protocol: TCP
+        resources:
+          requests:
+            cpu: 200m
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: green-service
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+    nodePort: 32222
+  selector:
+    name: webservice-green
+  type: NodePort
