@@ -1,0 +1,12 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: pre-production-ingress-xip
+spec:
+  rules:
+  - host: pre-production.192.168.99.100.xip.io
+    http:
+      paths:
+      - backend:
+          serviceName: green-service
+          servicePort: 80
