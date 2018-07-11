@@ -1,0 +1,41 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+  name: web-quota
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: web-quota
+  template:
+    metadata:
+      labels:
+        name: web-quota
+    spec:
+      containers:
+      - image: paichayon/web-serviceblue
+        name: web-quota
+        ports:
+        - containerPort: 80
+          protocol: TCP
+        resources:
+          requests:
+            cpu: 100m
+            memory: "256Mi"
+          limits:
+            cpu: 800m
+            memory: 512Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-quota-service
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    name: web-quota
+  type: NodePort
