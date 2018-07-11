@@ -4,7 +4,7 @@ metadata:
   name: localvol
 spec:
   capacity:
-    storage: 500Mi
+    storage: 50Mi
   accessModes:
     - ReadWriteMany
   storageClassName: local-store
